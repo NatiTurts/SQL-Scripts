@@ -1,4 +1,0 @@
-Same layout as powerapps dashoard daily report.
---daily figures per rep
---monthly figures per rep
---year to date figure per rep
