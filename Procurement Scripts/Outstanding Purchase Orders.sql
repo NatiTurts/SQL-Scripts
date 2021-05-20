@@ -1,0 +1,4 @@
+select AccountID,Account[SupplierCode], Name[SupplierName],Case when isnull(code,'') = '' then 'GL' else 'ST' end[LineType],LineItem,cDescription[LineDescription], Description[Doc_Description],OrderNum, OrderDate, DueDate,Qty_On_Hand, QtyOnPO, QtyOnSO,WarehouseCode, fQuantity[OrderQty],fqtyprocessed[ConfirmedQty],QtyOutstanding[OutstandingQty], funitcost[UnitCost],funitpriceexcl[UnitPriceExcl],Fquantitylinetotexcl[LineTotalExcl], Case when On_Hold = 0 then 'No' else 'Yes' End [On_Hold]
+from [ICC_NEW].[dbo]._bvPurchaseOrdersFull 
+where  ((DocState = 1) or ((DocState=3 and IsNull(QtyOutstanding,0)<>0)) or ((DocType = 9 and DocState=3 and IsNull(QtyOutstanding,0)<>0)))
+Order by AccountID ASC, DueDate ASC
