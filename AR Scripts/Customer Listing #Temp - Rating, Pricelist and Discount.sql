@@ -28,8 +28,8 @@ select
 	   when C.iARPriceListNameID = '9' Then 'FOREIGN'
 	   when C.iARPriceListNameID = '10' Then 'COOPS'
 	   End as Pricelist
-from ICC_NEW.dbo._bvARAccountsFull C
-inner join ICC_NEW.dbo._bvCCCustomer A on A.Account = C.Account
+from .dbo._bvARAccountsFull C
+inner join .dbo._bvCCCustomer A on A.Account = C.Account
 group by A.Account, A.Name, C.uiARStarrating, C.iARPriceListNameID
 
 select *
