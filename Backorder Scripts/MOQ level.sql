@@ -1,0 +1,5 @@
+--MOQ level
+-- add leveles based off [(2020+2019) /24]*15% -- rounded to nearest 50/100
+-- add to reports and report.
+--Mark agreed followed by buk import. Procurement to mamage afterhand.
+--formulate a report based off SOH vs MOQ. Those lower, included in report.
