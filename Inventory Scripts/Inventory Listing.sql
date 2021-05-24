@@ -1,5 +1,3 @@
-test
-
 select 
 S.code as [Code]
 , S.Description_1 as [Description]
