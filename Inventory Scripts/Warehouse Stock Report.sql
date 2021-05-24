@@ -1,3 +1,5 @@
+edit
+
 select 
 S.code as [Code]
 , W.Code
