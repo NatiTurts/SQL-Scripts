@@ -1,9 +1,8 @@
 use tempdb
 
-	If(OBJECT_ID('tempdb..#Staging') Is Not Null)
-	Begin
-		Drop Table #Staging,#Final
-	End	
+	If OBJECT_ID('tempdb..#Staging') Is Not Null Drop Table #Staging
+	If(OBJECT_ID('tempdb..#Final') Is Not Null) Begin Drop Table #Final
+	end
 
 	
 		create table #Staging (OrderNumber varchar (max), AuditNumber varchar (max), Customer varchar (max), DateStamp datetime )
@@ -13,7 +12,7 @@ use tempdb
 					select distinct
 					P.Order_No as [OrderNumber]
 					, P.cAuditNumber as [AuditNumber]
-					, C.Customer as [Customer]
+					, P.DrCrAccount as [Customer]
 					, P.TxDate as [DateStamp]
 					from ICC_NEW.dbo.PostGL P
 					inner join ICC_NEW.dbo._bvCMCustomerFull C on C.CustomerID = P.DrCrAccount
@@ -30,21 +29,24 @@ use tempdb
 		
 
 Select distinct
- -- GL.AutoIdx
- F.FinalAudit
-, CC.Customer
+--GL.AutoIdx
+ Gl.cReference2
+ , GL.Reference
+ , CC.Customer
+, F.FinalAudit
+, GL.DrCrAccount
 , GL.TxDate
 , GL.UserName
 from #Final F
 inner join ICC_NEW.dbo.PostGL GL on GL.cAuditNumber = F.FinalAudit
 inner join ICC_NEW.dbo._bvCMCustomerFull CC on CC.CustomerID = GL.DrCrAccount
+--where F.FinalAudit = '320616.0002'
 order by F.FinalAudit
 
 	use tempdb
 
-	If(OBJECT_ID('tempdb..#Staging') Is Not Null)
-	Begin
-		Drop Table #Staging,#Final
-	End	
+	If OBJECT_ID('tempdb..#Staging') Is Not Null Drop Table #Staging
+	If(OBJECT_ID('tempdb..#Final') Is Not Null) Begin Drop Table #Final
+	end
 
 
