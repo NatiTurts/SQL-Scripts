@@ -1,3 +1,13 @@
+trial balance 
+Dr-Cr
+
+valuation
+Value (SOH*Weighted Average)
+
+= If(dr-cr) -sum(valuation) > = 500
+= If(dr-cr) -sum(valuation) < = 500
+ then email
+
 use tempdb
 
 	If(OBJECT_ID('tempdb..#InvStaging') Is Not Null)
@@ -26,3 +36,7 @@ group by INS.ItemGroup
 	Begin
 		Drop Table #InvStaging
 	End	
+
+
+
+
