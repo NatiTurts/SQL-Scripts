@@ -1,12 +1,12 @@
-trial balance 
-Dr-Cr
+--trial balance 
+--Dr-Cr
 
-valuation
-Value (SOH*Weighted Average)
+--valuation
+--Value (SOH*Weighted Average)
 
-= If(dr-cr) -sum(valuation) > = 500
-= If(dr-cr) -sum(valuation) < = 500
- then email
+--= If(dr-cr) -sum(valuation) > = 500
+--= If(dr-cr) -sum(valuation) < = 500
+--then email
 
 use tempdb
 
