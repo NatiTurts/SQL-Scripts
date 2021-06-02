@@ -1,7 +1,8 @@
 alter procedure usp_UpdatePriceList(
 @PriceListId int,
 @StockId int,
-@ExclAmount float
+@ExclAmount float,
+@InclAmount float
 )as
 
 
@@ -15,11 +16,11 @@ begin
 insert into [_etblPriceListPrices]
 (iPriceListNameID,iStockID,iWarehouseID,bUseMarkup,iMarkupOnCost,fMarkupRate,fExclPrice,fInclPrice,
 dPLPricesTimeStamp,_etblPriceListPrices_iBranchID)
-select @PriceListId,@StockId,0,0,0,0,@ExclAmount,round(@ExclAmount*1.15,2),GETDATE(), NULL
+select @PriceListId,@StockId,0,0,0,0,@ExclAmount,round(@InclAmount,2),GETDATE(), NULL
 --from WhseMst 
 --where iWarehouseID not in('')
 end
 else
 begin
-update _evPriceListPrices set fExclPrice = @ExclAmount, fInclPrice = round(@ExclAmount*1.15,2) where IDPriceListPrices = @Id
+update _evPriceListPrices set fExclPrice = @ExclAmount, fInclPrice = round(@InclAmount,2) where IDPriceListPrices = @Id
 end
