@@ -22,7 +22,7 @@ create table #QuotesPrev (InternalSales varchar (max), Quotes int )
 		select distinct
 		S.ulIDSOrdSalesRep as [EmployeeName]
 		from ICC_NEW.dbo._bvSalesOrdersFull S
-		where S.ulIDSOrdSalesRep not in ('') and S.ulIDSOrdSalesRep not in ('Shenaaz','Dhashni Moodley','Carlos Hlanganiso','Prudence Zwane','Siyabonga','Khatazile Mathebula','Caleen Parker','Samekeliso Ntini','Kgomotso Sibeko','Cynthia Maphumolo','Jabu Mnisi','Shawn Oosthuizen','Cedric','Shirley Ngobeni','Denise Dexter')
+		where S.ulIDSOrdSalesRep not in ('') and S.ulIDSOrdSalesRep not in ('Dhashni Moodley','Carlos Hlanganiso','Prudence Zwane','Siyabonga','Khatazile Mathebula','Caleen Parker','Samekeliso Ntini','Kgomotso Sibeko','Cynthia Maphumolo','Jabu Mnisi','Shawn Oosthuizen','Cedric','Shirley Ngobeni','Denise Dexter')
 
 	insert into #OrdersCurrent (Orders, InternalSales)
 
@@ -78,7 +78,7 @@ left join #OrdersCurrent OC on OC.InternalSales = E.EmployeeName
 left join #QuotesCurrent QC on QC.InternalSales = E.EmployeeName
 left join #OrdersPrev OP on OP.InternalSales = E.EmployeeName
 Left Join #QuotesPrev QP on QP.InternalSales = E.EmployeeName
---where OC.InternalSales not in ('Alicia','Shenaaz','Phindele Makhathini','Carol')
+--where E.EmployeeName not in ('Alicia','Cynthia','Phindele Makhathini','Carol','Ephraim','Joyce')
 group by E.EmployeeName
 
 Use tempdb
