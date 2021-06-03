@@ -11,6 +11,7 @@ SELECT
 , S.ucIIitemstyle AS ItemStyleCode
 , S.ItemGroup
 , C.PriceListName AS Pricelist
+, C.ulARRegion as Region
 , CASE WHEN C.uiARStarrating = '0' THEN S.DefaultPriceExcl WHEN C.uiARStarrating = '1' THEN S.ExPr2
 	   WHEN C.uiARStarrating = '2' THEN S.ExPr3 
 	   WHEN C.uiARStarrating = '3' THEN (S.ExPr3 * 0.95) 
@@ -55,4 +56,4 @@ LEFT JOIN ICC_NEW.dbo._bvStockFull AS S ON S.StockLink = P.AccountLink
 INNER JOIN ICC_APP.dbo.Internal_Sales_Targets AS I ON I.Full_Name = C.ulARInternalrep1
 WHERE (P.Id IN ('Inv', 'Crn', 'OInv', 'POSI', 'POSC')) AND (P.TxDate >= '2020-12-01') AND (P.TxDate <= '2021-11-30')
 GROUP BY C.Account, P.Reference, S.LastGRVCost, S.ExPr3, S.ExPr2, C.PriceListName, S.DefaultPriceExcl, P.Order_No, I.Target, C.uiARStarrating, P.TxDate, D.CustomerName, C.ulARInternalrep1, C.Area, S.Code, S.Description_1, S.ucIIitemstyle, 
-                  S.ItemGroup, S.ItemGroupDescription, S.ulIIClassification, P.RepCode, P.RepName, CAST(YEAR(P.TxDate) AS VARCHAR(4)), DATENAME(month, P.TxDate), CAST(MONTH(P.TxDate) AS VARCHAR(4))
+                  , C.ulARRegion,S.ItemGroup, S.ItemGroupDescription, S.ulIIClassification, P.RepCode, P.RepName, CAST(YEAR(P.TxDate) AS VARCHAR(4)), DATENAME(month, P.TxDate), CAST(MONTH(P.TxDate) AS VARCHAR(4))
