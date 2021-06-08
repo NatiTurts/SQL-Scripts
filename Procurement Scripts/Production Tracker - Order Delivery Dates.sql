@@ -6,8 +6,8 @@ select S.Code as Code
 , H.Production_DeliveryDate as Delivery_date
 , H.Production_Stage as Stage
 , H.Sage_DocStatus as Status
-from ICC_NEW.dbo.StkItem S
-inner join ICC_NEW.dbo._bvPurchaseOrdersFull P on P.Code = S.Code
-inner join ICC_APP.dbo.ProductionTracker_Header H on H.PO_Number = P.OrderNum
+from [Database].dbo.StkItem S
+inner join [Database].dbo._bvPurchaseOrdersFull P on P.Code = S.Code
+inner join [Database].dbo.ProductionTracker_Header H on H.PO_Number = P.OrderNum
 where p.DocumentStateDesc not in ('Template') and H.Production_Stage not in ('&nbsp;')
 group by S.Code, s.Description_1, S.Qty_On_Hand, H.PO_Number, H.Production_DeliveryDate, H.Production_Stage, H.Sage_DocStatus

@@ -15,7 +15,7 @@ select
 , case when S.On_Hold = '0' then 'Not on Hold'
              else 'On Hold'             
   end as [On Hold]
-from ICC_NEW.dbo._bvSalesOrdersFull S
+from [Database].dbo._bvSalesOrdersFull S
 where S.DocumentStateDesc in ('Unprocessed', 'Partially Processed') and S.fQtyReserved>0
 and S.ubIDSOrdEmbroideryorder = '0'
 group by S.OrderNum, S.cAccountName, S.DocumentStateDesc, S.OrderDate, S.On_Hold, S.AccountTerms

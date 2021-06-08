@@ -18,8 +18,8 @@ from
 		 S.ucIIitemstyle COLLATE Latin1_General_CI_AS as [ItemStyleCode]
 		, Sum(P.ActualQuantityInvoiced) as Qty
 		, CAST(YEAR(p.txdate) AS VARCHAR(4)) as [Year]
-		from ICC_NEW.dbo._bvSTTransactionsFull P
-		LEFT JOIN ICC_NEW.dbo._bvStockFull S on S.StockLink = P.AccountLink 
+		from [Database].dbo._bvSTTransactionsFull P
+		LEFT JOIN [Database].dbo._bvStockFull S on S.StockLink = P.AccountLink 
 		where (P.Id in ('Inv','Crn','OInv','POSI','POSC'))  and  (P.TxDate>='2020-01-01') and (P.TxDate<='2020-12-31')
 		Group by s.ucIIitemstyle, CAST(YEAR(p.txdate) AS VARCHAR(4))
 
@@ -33,5 +33,5 @@ PIVOT(
 			[2020])
 ) as P
 
-inner join ICC_NEW.dbo.StkItem T on T.ucIIitemstyle = P.ItemStyleCode 
+inner join [Database].dbo.StkItem T on T.ucIIitemstyle = P.ItemStyleCode 
 group by P.ItemStyleCode, P.[2019], P.[2020], T.ulIIClassification;

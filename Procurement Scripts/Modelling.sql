@@ -14,7 +14,7 @@ Select
 , AVG(M.Average_Cost)				as	[Average Cost]
 , SUM(M.Average_Consumption)		as	[Average Consumption]
 , SUM(M.SOH)*AVG(M.Average_Cost)		as	[SOH Valuation]
-from ICC_APP.dbo.StockModelling_Lines M
-inner join ICC_NEW.dbo.StkItem S on S.code = M.ItemStyleCode
-WHERE M.Model_Number IN (SELECT max(M.Model_Number) From ICC_APP.dbo.StockModelling_Lines M)
+from [Database].dbo.StockModelling_Lines M
+inner join [Database].dbo.StkItem S on S.code = M.ItemStyleCode
+WHERE M.Model_Number IN (SELECT max(M.Model_Number) From [Database].dbo.StockModelling_Lines M)
 group by M.Model_Number, S.ucIIitemstyle, M.Description, M.Category, M.Classification, M.Planning_Status

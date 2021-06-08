@@ -22,10 +22,10 @@ select
 , LineCost = sum((P.Cost * P.ActualQuantityInvoiced))
 , LineSales = sum(ActualValue)
 , Profit = sum(ActualValue)-sum((P.Cost * P.ActualQuantityInvoiced))
-from ICC_NEW.dbo._bvSTTransactionsFull P
-LEFT JOIN ICC_NEW.dbo._bvARAccountsFull C on C.DCLink = P.DrCrAccount
-LEFT JOIN ICC_NEW.dbo._bvCMCustomerFull D on D.Customer = C.Account
-LEFT JOIN ICC_NEW.dbo._bvStockFull S on S.StockLink = P.AccountLink 
+from [Database].dbo._bvSTTransactionsFull P
+LEFT JOIN [Database].dbo._bvARAccountsFull C on C.DCLink = P.DrCrAccount
+LEFT JOIN [Database].dbo._bvCMCustomerFull D on D.Customer = C.Account
+LEFT JOIN [Database].dbo._bvStockFull S on S.StockLink = P.AccountLink 
 where (P.Id in ('Inv','Crn','OInv','POSI','POSC'))  and  (P.TxDate>=@DateStart@) and (P.TxDate<=@DateEnd@)
 Group by s.ucIIitemstyle, S.ulIIClassification
 
@@ -39,10 +39,10 @@ select
 , LineCost = sum((P.Cost * P.ActualQuantityInvoiced))
 , LineSales = sum(ActualValue)
 , Profit = sum(ActualValue)-sum((P.Cost * P.ActualQuantityInvoiced))
-from The_Industrial_Clothing_Company.dbo._bvSTTransactionsFull P
-LEFT JOIN The_Industrial_Clothing_Company.dbo._bvARAccountsFull C on C.DCLink = P.DrCrAccount
-LEFT JOIN The_Industrial_Clothing_Company.dbo._bvCMCustomerFull D on D.Customer = C.Account
-LEFT JOIN The_Industrial_Clothing_Company.dbo._bvStockFull S on S.StockLink = P.AccountLink 
+from [Database].dbo._bvSTTransactionsFull P
+LEFT JOIN [Database].dbo._bvARAccountsFull C on C.DCLink = P.DrCrAccount
+LEFT JOIN [Database].dbo._bvCMCustomerFull D on D.Customer = C.Account
+LEFT JOIN [Database].dbo._bvStockFull S on S.StockLink = P.AccountLink 
 where (P.Id in ('Inv','Crn','OInv','POSI','POSC'))  and  (P.TxDate>=@DateStart@) and (P.TxDate<=@DateEnd@)
 Group by s.ucIIitemstyle, S.ulIIClassification
 
@@ -60,7 +60,7 @@ Select
 , Ave_Cost_Price = ROUND((T.LineCost)/ NULLIF(T.Quantity, 0),2)
 , GP = ROUND((T.Profit)/ NULLIF(T.LineSales, 0),2)
 from #Temp T
-inner join ICC_NEW.dbo.StkItem S on S.ucIIitemstyle = T.Parent
+inner join [Database].dbo.StkItem S on S.ucIIitemstyle = T.Parent
 group by T.Parent, T.Classification, T.Quantity, T.LineCost, T.LineSales, T.Profit
 
 If(OBJECT_ID('tempdb..#temp') Is Not Null)

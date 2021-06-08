@@ -49,11 +49,11 @@ SELECT
 , SUM(P.ActualValue) AS LineSales
 , SUM(P.ActualValue) - SUM(P.Cost * P.ActualQuantityInvoiced) AS Profit
 , SUM(P.ActualValue) - SUM(S.LastGRVCost * P.ActualQuantityInvoiced) AS GRVProfit
-FROM ICC_NEW.dbo._bvSTTransactionsFull AS P
-LEFT JOIN ICC_NEW.dbo._bvARAccountsFull AS C ON C.DCLink = P.DrCrAccount
-LEFT JOIN ICC_NEW.dbo._bvCMCustomerFull AS D ON D.Customer = C.Account
-LEFT JOIN ICC_NEW.dbo._bvStockFull AS S ON S.StockLink = P.AccountLink
-INNER JOIN ICC_APP.dbo.Internal_Sales_Targets AS I ON I.Full_Name = C.ulARInternalrep1
+FROM [Database].dbo._bvSTTransactionsFull AS P
+LEFT JOIN [Database].dbo._bvARAccountsFull AS C ON C.DCLink = P.DrCrAccount
+LEFT JOIN [Database].dbo._bvCMCustomerFull AS D ON D.Customer = C.Account
+LEFT JOIN [Database].dbo._bvStockFull AS S ON S.StockLink = P.AccountLink
+INNER JOIN [Database].dbo.Internal_Sales_Targets AS I ON I.Full_Name = C.ulARInternalrep1
 WHERE (P.Id IN ('Inv', 'Crn', 'OInv', 'POSI', 'POSC')) AND (P.TxDate >= '2020-12-01') AND (P.TxDate <= '2021-11-30')
 GROUP BY C.Account, P.Reference, S.LastGRVCost, S.ExPr3, S.ExPr2, C.PriceListName, S.DefaultPriceExcl, P.Order_No, I.Target, C.uiARStarrating, P.TxDate, D.CustomerName, C.ulARInternalrep1, C.Area, S.Code, S.Description_1, S.ucIIitemstyle, 
-                  , C.ulARRegion,S.ItemGroup, S.ItemGroupDescription, S.ulIIClassification, P.RepCode, P.RepName, CAST(YEAR(P.TxDate) AS VARCHAR(4)), DATENAME(month, P.TxDate), CAST(MONTH(P.TxDate) AS VARCHAR(4))
+                   C.ulARRegion,S.ItemGroup, S.ItemGroupDescription, S.ulIIClassification, P.RepCode, P.RepName, CAST(YEAR(P.TxDate) AS VARCHAR(4)), DATENAME(month, P.TxDate), CAST(MONTH(P.TxDate) AS VARCHAR(4))

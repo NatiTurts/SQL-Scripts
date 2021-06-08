@@ -18,8 +18,8 @@ Case
  when CAST(YEAR(p.txdate) AS VARCHAR(4)) = '2019' Then sum(P.ActualQuantityInvoiced)
 End as 'Year 2019'
 
-from icc_new.dbo._bvSTTransactionsFull P
-LEFT JOIN icc_new.dbo._bvStockFull S on S.StockLink = P.AccountLink 
+from [Database].dbo._bvSTTransactionsFull P
+LEFT JOIN [Database].dbo._bvStockFull S on S.StockLink = P.AccountLink 
 where (P.Id in ('Inv','Crn','OInv','POSI','POSC'))  and  (P.TxDate>='2018-06-01') and (P.TxDate<=@EndDate@)
 Group by s.ucIIitemstyle,Datename(month,p.txdate), CAST(YEAR(p.txdate) AS VARCHAR(4)), CAST(MONTH(p.txdate) as INT)
 
@@ -39,8 +39,8 @@ Case
  when CAST(YEAR(p.txdate) AS VARCHAR(4)) = '2019' Then sum(P.ActualQuantityInvoiced)
 End as 'Year 2019'
 
-from The_Industrial_Clothing_Company.dbo._bvSTTransactionsFull P 
-LEFT JOIN The_Industrial_Clothing_Company.dbo._bvStockFull S on S.StockLink = P.AccountLink 
+from [Database].dbo._bvSTTransactionsFull P 
+LEFT JOIN [Database].dbo._bvStockFull S on S.StockLink = P.AccountLink 
 where (P.Id in ('Inv','Crn','OInv','POSI','POSC'))  and  (P.TxDate>=@StartDate@) and (P.TxDate<='2018-05-31')
 Group by s.ucIIitemstyle,Datename(month,p.txdate), CAST(YEAR(p.txdate) AS VARCHAR(4)),CAST(MONTH(p.txdate) as INT) ) as T
 
@@ -79,7 +79,7 @@ T1.ItemStyleCode
 , [Growth 2018] = Format(ISNULL(Round(NULLIF(((T1.[Sales 2018]/12)-NULLIF((T1.[Sales 2017]/12),0))/NULLIF((T1.[Sales 2017]/12),0),0),2),0),'P')
 , [Growth 2019] = Format(ISNULL(Round(NULLIF(((T1.[Sales 2019]/CAST(MONTH(@EndDate@) as INT))-NULLIF((T1.[Sales 2018]/12),0))/NULLIF((T1.[Sales 2018]/12),0),0),2),0),'P') 
 from #Temp1 T1 
-inner join ICC_NEW.dbo.StkItem S on S.ucIIitemstyle = T1.ItemStyleCode
+inner join [Database].dbo.StkItem S on S.ucIIitemstyle = T1.ItemStyleCode
 group by ItemStyleCode, [Sales 2017], [Sales 2018], [Sales 2019], ulIIClassification, T1.Month
 order by T1.ItemStyleCode
 

@@ -30,8 +30,8 @@ SELECT P.LineItem AS Code
 	   when datename(month, P.OrderDate) = 'November' then '12'
 	   end as [MonthNo]
 , P.ulIIClassification, P.ItemGroup
-FROM ICC_NEW.dbo._bvSalesOrdersFull AS P
-LEFT OUTER JOIN ICC_NEW.dbo._bvCMCustomerFull AS C ON C.Customer = P.Account
+FROM [Database].dbo._bvSalesOrdersFull AS P
+LEFT OUTER JOIN [Database].dbo._bvCMCustomerFull AS C ON C.Customer = P.Account
 WHERE  (C.Customer NOT IN ('ALL030', 'TJO002', 'TOY001')) AND (P.On_Hold = '0') AND (P.bCODAccount = '0') AND (P.DocumentStateDesc IN ('Partially Processed', 'Unprocessed', 'Unprocessed and Patrcially')) AND (P.QtyOutstanding > 0) AND 
 (P.OrderDate >= '2020-01-01') AND (P.OrderDate <= '2021-12-31') AND (P.ubIIPlanning = 'TRUE') AND (P.WarehouseCode NOT IN ('IN01')) AND (P.ubIDSOrdEmbroideryorder = '0') AND (P.DueDate < GETDATE()) AND 
 (P.OrderDate < DATEADD(MONTH, DATEDIFF(MONTH, - 1, GETDATE()) - 1, 0))

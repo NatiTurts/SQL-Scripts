@@ -26,8 +26,8 @@ from
 		 S.ucIIitemstyle COLLATE Latin1_General_CI_AS as [ItemStyleCode]
 		, Sum(P.ActualQuantityInvoiced) as Qty
 		, CAST(YEAR(p.txdate) AS VARCHAR(4)) as [Year]
-		from icc_new.dbo._bvSTTransactionsFull P
-		LEFT JOIN icc_new.dbo._bvStockFull S on S.StockLink = P.AccountLink 
+		from [Database].dbo._bvSTTransactionsFull P
+		LEFT JOIN [Database].dbo._bvStockFull S on S.StockLink = P.AccountLink 
 		where (P.Id in ('Inv','Crn','OInv','POSI','POSC'))  and  (P.TxDate>='2019-01-01') and (P.TxDate<='2019-12-31')
 		Group by s.ucIIitemstyle, CAST(YEAR(p.txdate) AS VARCHAR(4))
 
@@ -37,8 +37,8 @@ from
 		 S.ucIIitemstyle COLLATE Latin1_General_CI_AS as [ItemStyleCode]
 		, Sum(P.ActualQuantityInvoiced) as Qty
 		, CAST(YEAR(p.txdate) AS VARCHAR(4)) as [Year]
-		from icc_new.dbo._bvSTTransactionsFull P
-		LEFT JOIN icc_new.dbo._bvStockFull S on S.StockLink = P.AccountLink 
+		from [Database].dbo._bvSTTransactionsFull P
+		LEFT JOIN [Database].dbo._bvStockFull S on S.StockLink = P.AccountLink 
 		where (P.Id in ('Inv','Crn','OInv','POSI','POSC'))  and  (P.TxDate>='2018-06-01') and (P.TxDate<='2018-12-31')
 		Group by s.ucIIitemstyle, CAST(YEAR(p.txdate) AS VARCHAR(4))
 
@@ -48,8 +48,8 @@ from
 		 S.ucIIitemstyle COLLATE Latin1_General_CI_AS as [ItemStyleCode]
 		, Sum(P.ActualQuantityInvoiced) as Qty
 		, CAST(YEAR(p.txdate) AS VARCHAR(4)) as [Year]
-		from The_Industrial_Clothing_Company.dbo._bvSTTransactionsFull P
-		LEFT JOIN The_Industrial_Clothing_Company.dbo._bvStockFull S on S.StockLink = P.AccountLink 
+		from [Database].dbo._bvSTTransactionsFull P
+		LEFT JOIN [Database].dbo._bvStockFull S on S.StockLink = P.AccountLink 
 		where (P.Id in ('Inv','Crn','OInv','POSI','POSC'))  and  (P.TxDate>='2018-01-01') and (P.TxDate<='2018-05-31')
 		Group by s.ucIIitemstyle, CAST(YEAR(p.txdate) AS VARCHAR(4))
 
@@ -59,8 +59,8 @@ from
 		 S.ucIIitemstyle COLLATE Latin1_General_CI_AS as [ItemStyleCode]
 		, Sum(P.ActualQuantityInvoiced) as Qty
 		, CAST(YEAR(p.txdate) AS VARCHAR(4)) as [Year]
-		from The_Industrial_Clothing_Company.dbo._bvSTTransactionsFull P
-		LEFT JOIN The_Industrial_Clothing_Company.dbo._bvStockFull S on S.StockLink = P.AccountLink 
+		from [Database].dbo._bvSTTransactionsFull P
+		LEFT JOIN [Database].dbo._bvStockFull S on S.StockLink = P.AccountLink 
 		where (P.Id in ('Inv','Crn','OInv','POSI','POSC'))  and  (P.TxDate>='2017-01-01') and (P.TxDate<='2017-12-31')
 		Group by s.ucIIitemstyle, CAST(YEAR(p.txdate) AS VARCHAR(4))
 
@@ -70,8 +70,8 @@ from
 		 S.ucIIitemstyle COLLATE Latin1_General_CI_AS as [ItemStyleCode]
 		, Sum(P.ActualQuantityInvoiced) as Qty
 		, CAST(YEAR(p.txdate) AS VARCHAR(4)) as [Year]
-		from ICC_NEW.dbo._bvSTTransactionsFull P
-		LEFT JOIN ICC_NEW.dbo._bvStockFull S on S.StockLink = P.AccountLink 
+		from [Database].dbo._bvSTTransactionsFull P
+		LEFT JOIN [Database].dbo._bvStockFull S on S.StockLink = P.AccountLink 
 		where (P.Id in ('Inv','Crn','OInv','POSI','POSC'))  and  (P.TxDate>='2020-01-01') and (P.TxDate<='2020-12-31')
 		Group by s.ucIIitemstyle, CAST(YEAR(p.txdate) AS VARCHAR(4))
 
@@ -88,6 +88,6 @@ PIVOT(
 			[2020])
 ) as P
 
-inner join ICC_NEW.dbo.StkItem T on T.ucIIitemstyle = P.ItemStyleCode 
+inner join [Database].dbo.StkItem T on T.ucIIitemstyle = P.ItemStyleCode 
 
 group by P.ItemStyleCode, P.[2017], P.[2018], P.[2019], P.[2020], T.ulIIClassification;

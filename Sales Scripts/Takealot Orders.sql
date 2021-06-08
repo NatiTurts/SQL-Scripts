@@ -13,11 +13,11 @@ SELECT
 , PL.fInclPrice as [Incl]
 , SUM(P.ActualValue) AS LineSales
 , Case when (PL.fInclPrice * P.ActualQuantityInvoiced) = P.ActualValue then 'True' else 'False' end as [Check]
-FROM ICC_NEW.dbo._bvSTTransactionsFull AS P
-LEFT JOIN ICC_NEW.dbo._bvARAccountsFull AS C ON C.DCLink = P.DrCrAccount
-LEFT JOIN ICC_NEW.dbo._bvCMCustomerFull AS D ON D.Customer = C.Account
-LEFT JOIN ICC_NEW.dbo._bvStockFull AS S ON S.StockLink = P.AccountLink
-Inner join ICC_NEW.dbo._evPriceListPrices PL on PL.iStockID = P.AccountLink
+FROM [Database].dbo._bvSTTransactionsFull AS P
+LEFT JOIN [Database].dbo._bvARAccountsFull AS C ON C.DCLink = P.DrCrAccount
+LEFT JOIN [Database].dbo._bvCMCustomerFull AS D ON D.Customer = C.Account
+LEFT JOIN [Database].dbo._bvStockFull AS S ON S.StockLink = P.AccountLink
+Inner join [Database].dbo._evPriceListPrices PL on PL.iStockID = P.AccountLink
 WHERE (P.Id IN ('Inv', 'Crn', 'OInv', 'POSI', 'POSC')) and PL.iPriceListNameID = '11'
 AND (P.TxDate >= @StartDate) AND (P.TxDate <= @EndDate) and P.Account = 'TAK006'
 group by

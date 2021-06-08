@@ -17,7 +17,7 @@ SELECT 	    T1.Item_Code,
 			When T1.Count2_Status = 'Pending Approval' THEN (T1.Open_Qty -T1.Count2)
 			When T1.Count3_Status = 'Pending Approval' THEN (T1.Open_Qty -T1.Count3)
 		    End as 'Count Variance' 		 
-  FROM [ICC_APP].[dbo].[Inbound_Header] T0
-  inner join [ICC_APP].[dbo].Inbound_Lines T1
+  FROM [[Database]].[dbo].[Inbound_Header] T0
+  inner join [[Database]].[dbo].Inbound_Lines T1
   on T0.ID = T1.Link
   Where T0.Status = 'O' and T1.Link = 36

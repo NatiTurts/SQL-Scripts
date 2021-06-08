@@ -2,20 +2,7 @@ select
 	C.Account
 	, C.Name as AccountDescription
 	, C.uiARStarrating as [Star Rating]
-	, Case  when P.ulIDSOrdSalesRep =   'Alicia'                then	'Alicia Sirkison'
-            when P.ulIDSOrdSalesRep = 	'Angelina Nojwaqa'  	then	'Angelina Nojwaqa'
-            when P.ulIDSOrdSalesRep = 	'Carol'	                then	'Carol Tshuma'
-            when P.ulIDSOrdSalesRep = 	'Cynthia'	            then	'Cynthia Mwanza'
-            when P.ulIDSOrdSalesRep = 	'Dylan Broodryk'	    then	'Dylan Broodryk'
-            when P.ulIDSOrdSalesRep = 	'Ephraim'	            then	'Ephraim Mbuyisa'
-            when P.ulIDSOrdSalesRep = 	'Joyce'	                then	'Joyce Chauke'
-            when P.ulIDSOrdSalesRep = 	'Latishia Alberts'	    then	'Latishia Alberts'
-            when P.ulIDSOrdSalesRep = 	'Melusi Khumalo'	    then	'Melusi Khumalo'
-            when P.ulIDSOrdSalesRep = 	'Patricia Mothibeli'	then	'Patricia Mothibeli'
-            when P.ulIDSOrdSalesRep = 	'Phindele Makhathini'	then	'Phindile Makhathini'
-            when P.ulIDSOrdSalesRep = 	'Shenaaz'	            then	'Shenaaz Hortense'
-            when P.ulIDSOrdSalesRep = 	'Sindiswa Mashigo'  	then	'Sindiswa Mashigo'
-       else P.ulIDSOrdSalesRep end as [Internal Sales]
+	, P.ulIDSOrdSalesRep as [Internal Sales]
 	, P.InvNumber as [Invoice Number]
 	, P.OrderNum as [Order Number]
 	, S.Code as ItemCode
@@ -58,9 +45,9 @@ select
     , SUM(P.fQtyProcessedLineTotExcl) AS LineSales
     , SUM(P.fQtyProcessedLineTotExcl) - SUM(P.fUnitCost * P.fQtyProcessed) AS Profit
     , SUM(P.fQtyProcessedLineTotExcl) - SUM(S.LastGRVCost * P.fQtyProcessed) AS GRVProfit
-from ICC_NEW.dbo._bvSalesOrdersFull P
-LEFT OUTER JOIN ICC_NEW.dbo._bvARAccountsFull AS C ON C.DCLink = P.AccountID
-LEFT OUTER JOIN ICC_NEW.dbo._bvStockFull AS S ON S.StockLink = P.StockLink 
+from [Database].dbo._bvSalesOrdersFull P
+LEFT OUTER JOIN [Database].dbo._bvARAccountsFull AS C ON C.DCLink = P.AccountID
+LEFT OUTER JOIN [Database].dbo._bvStockFull AS S ON S.StockLink = P.StockLink 
 where (P.InvDate >= '2019-12-01') AND (P.InvDate <= '2020-11-30') and P.OrderNum not in ('Quote') and InvNumber not like '%TPS%' and P.InvNumber = '498621'
 Group By C.Account, C.Name, C.uiARStarrating, P.ulIDSOrdSalesRep, P.InvNumber, P.OrderNum, S.Code, S.Description_1, S.ucIIitemstyle, S.ItemGroup
 , C.PriceListName, S.ItemGroupDescription, S.ulIIClassification, P.RepName, P.RepCode, S.LastGRVCost, P.InvDate, P.fQtyProcessedLineTotExcl, P.fQtyProcessed

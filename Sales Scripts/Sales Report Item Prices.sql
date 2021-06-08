@@ -30,10 +30,10 @@ CAST(MONTH(p.txdate) AS VARCHAR(4))[MonthNo],
 Quantity = sum(P.ActualQuantityInvoiced),  LineCost = sum((P.Cost * P.ActualQuantityInvoiced)),
 LineSales = sum(ActualValue),
 Profit = sum(ActualValue)-sum((P.Cost * P.ActualQuantityInvoiced))
-from icc_new.dbo._bvSTTransactionsFull P
-LEFT JOIN icc_new.dbo._bvARAccountsFull C on C.DCLink = P.DrCrAccount
-LEFT JOIN ICC_NEW.dbo._bvCMCustomerFull D on D.Customer = C.Account
-LEFT JOIN icc_new.dbo._bvStockFull S on S.StockLink = P.AccountLink 
-Inner Join ICC_APP.dbo.Internal_Sales_Targets I on I.Full_Name = C.ulARInternalrep1
+from [Database].dbo._bvSTTransactionsFull P
+LEFT JOIN [Database].dbo._bvARAccountsFull C on C.DCLink = P.DrCrAccount
+LEFT JOIN [Database].dbo._bvCMCustomerFull D on D.Customer = C.Account
+LEFT JOIN [Database].dbo._bvStockFull S on S.StockLink = P.AccountLink 
+Inner Join [Database].dbo.Internal_Sales_Targets I on I.Full_Name = C.ulARInternalrep1
 where (P.Id in ('Inv','Crn','OInv','POSI','POSC'))  and  (P.TxDate>='2020-1-01') and (P.TxDate<='2020-12-31')
 Group by c.account, S.ExPr3, S.ExPr2, C.PriceListName, S.DefaultPriceExcl, P.Order_No, I.Target, C.uiARStarrating, p.txdate, D.CustomerName, C.ulARInternalrep1, c.area, s.code, s.Description_1, s.ucIIitemstyle, s.ItemGroup, s.ItemGroupDescription, S.ulIIClassification, p.repcode, p.repname, CAST(YEAR(p.txdate) AS VARCHAR(4)), Datename(month,p.txdate), CAST(MONTH(p.txdate) AS VARCHAR(4))
