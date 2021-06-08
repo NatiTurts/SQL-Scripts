@@ -5,7 +5,7 @@ select
 , F.AccountTypeDescription  	COLLATE Latin1_General_CI_AS												as GroupByField
 , F.AccountLink																								as	[AccountLink]
 , F.Account 	COLLATE Latin1_General_CI_AS																as [GLAccount]
-, AccountType_Old = [ICC_NEW].[dbo]._efnLedgerAccountTypeDescription(F.iAccountType)	COLLATE Latin1_General_CI_AS 
+, AccountType_Old = [Database].[dbo]._efnLedgerAccountTypeDescription(F.iAccountType)	COLLATE Latin1_General_CI_AS 
 , datename(month, P.dPeriodDate) COLLATE Latin1_General_CI_AS												as PeriodMonth
 , Case when datename(month, P.dPeriodDate) = 'December' then '1'
 	   when datename(month, P.dPeriodDate) = 'January' then '2'
@@ -58,13 +58,13 @@ select
 , X.TxBranchCode	COLLATE Latin1_General_CI_AS															as	[BranchCode]	
 , (X.Credit- X.Debit)																						as [DebitMinCredit]	
 , X.TxBranchDescription	COLLATE Latin1_General_CI_AS														as [BranchDescription]
-, DebitCredit = case when[ICC_NEW].[dbo]._efnGLAccTypesDebits(F.iAccountType) = 1 then 'D' else 'C' end	COLLATE Latin1_General_CI_AS 
+, DebitCredit = case when[Database].[dbo]._efnGLAccTypesDebits(F.iAccountType) = 1 then 'D' else 'C' end	COLLATE Latin1_General_CI_AS 
 
 from  
-[ICC_NEW].[dbo].[_evGLAccountsFull]  	F
-left outer join [ICC_NEW].[dbo].[_bvGLTransactionsFull] X on F.AccountLink = X.AccountLink  
-left outer join [ICC_NEW].[dbo].[_etblPeriod] P on P.idPeriod = X.Period  
-left join [ICC_NEW].[dbo].[Project] Pr on Pr.ProjectLink = X.Project
+[Database].[dbo].[_evGLAccountsFull]  	F
+left outer join [Database].[dbo].[_bvGLTransactionsFull] X on F.AccountLink = X.AccountLink  
+left outer join [Database].[dbo].[_etblPeriod] P on P.idPeriod = X.Period  
+left join [Database].[dbo].[Project] Pr on Pr.ProjectLink = X.Project
 
  
 where  F.AccountTypeDescription in ('Other Income','Revenue')

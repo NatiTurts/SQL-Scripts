@@ -39,12 +39,12 @@ select  'NEW_DB'[Type]
 , st.ucIIitemsize COLLATE Latin1_General_CI_AS as [StockItemSize]
 , st.ucIIitemfabric COLLATE Latin1_General_CI_AS as [StockItemFabric]
 , st.ucIIitemcolour COLLATE Latin1_General_CI_AS as [StockItemColour], ar.id COLLATE Latin1_General_CI_AS as [id]
-from [icc_new].[dbo].[_bvgltransactionsfull] ar 
-inner join [icc_new].[dbo].[_evGLAccountsFull] acc on acc.accountlink  = ar.accountlink 
-inner join [icc_new].[dbo].[_bvsttransactionsfull] stt on stt.cauditnumber COLLATE Latin1_General_CI_AS = ar.cauditnumber COLLATE Latin1_General_CI_AS
-inner join [icc_new].[dbo].[stkitem] st on st.stocklink  = stt.accountlink 
-inner join [icc_new].[dbo].[GrpTbl] gr on gr.stgroup COLLATE Latin1_General_CI_AS = st.itemgroup COLLATE Latin1_General_CI_AS and gr.SalesAccLink  = ar.AccountLink 
-inner join [icc_new].[dbo].[Client] Cl on cl.account COLLATE Latin1_General_CI_AS = stt.account COLLATE Latin1_General_CI_AS
+from [Database].[dbo].[_bvgltransactionsfull] ar 
+inner join [Database].[dbo].[_evGLAccountsFull] acc on acc.accountlink  = ar.accountlink 
+inner join [Database].[dbo].[_bvsttransactionsfull] stt on stt.cauditnumber COLLATE Latin1_General_CI_AS = ar.cauditnumber COLLATE Latin1_General_CI_AS
+inner join [Database].[dbo].[stkitem] st on st.stocklink  = stt.accountlink 
+inner join [Database].[dbo].[GrpTbl] gr on gr.stgroup COLLATE Latin1_General_CI_AS = st.itemgroup COLLATE Latin1_General_CI_AS and gr.SalesAccLink  = ar.AccountLink 
+inner join [Database].[dbo].[Client] Cl on cl.account COLLATE Latin1_General_CI_AS = stt.account COLLATE Latin1_General_CI_AS
 where ar.txdate >= '2018-01-01' and ar.txdate <= '2018-12-31' and ar.id in ('Inv','Crn','OInv','POSI','POSC')
 
 Union All
@@ -90,10 +90,10 @@ select  'OLD_DB'[Type]
 , st.ucIIitemsize COLLATE Latin1_General_CI_AS as [StockItemSize]
 , st.ucIIitemfabric COLLATE Latin1_General_CI_AS as [StockItemFabric]
 , st.ucIIitemcolour COLLATE Latin1_General_CI_AS as [StockItemColour], ar.id COLLATE Latin1_General_CI_AS as [id]
-from [The_Industrial_Clothing_Company].[dbo].[_bvgltransactionsfull] ar
-inner join [The_Industrial_Clothing_Company].[dbo].[_evGLAccountsFull] acc on acc.accountlink  = ar.accountlink  
-inner join [The_Industrial_Clothing_Company].[dbo].[_bvsttransactionsfull] stt on stt.cauditnumber COLLATE Latin1_General_CI_AS = ar.cauditnumber COLLATE Latin1_General_CI_AS
-inner join [The_Industrial_Clothing_Company].[dbo].[stkitem] st on st.stocklink  = stt.accountlink 
-inner join [The_Industrial_Clothing_Company].[dbo].[GrpTbl] gr on gr.stgroup COLLATE Latin1_General_CI_AS = st.itemgroup COLLATE Latin1_General_CI_AS and gr.SalesAccLink = ar.AccountLink 
-inner join [The_Industrial_Clothing_Company].[dbo].[Client] Cl on cl.account COLLATE Latin1_General_CI_AS = stt.account COLLATE Latin1_General_CI_AS
+from [Database].[dbo].[_bvgltransactionsfull] ar
+inner join [Database].[dbo].[_evGLAccountsFull] acc on acc.accountlink  = ar.accountlink  
+inner join [Database].[dbo].[_bvsttransactionsfull] stt on stt.cauditnumber COLLATE Latin1_General_CI_AS = ar.cauditnumber COLLATE Latin1_General_CI_AS
+inner join [Database].[dbo].[stkitem] st on st.stocklink  = stt.accountlink 
+inner join [Database].[dbo].[GrpTbl] gr on gr.stgroup COLLATE Latin1_General_CI_AS = st.itemgroup COLLATE Latin1_General_CI_AS and gr.SalesAccLink = ar.AccountLink 
+inner join [Database].[dbo].[Client] Cl on cl.account COLLATE Latin1_General_CI_AS = stt.account COLLATE Latin1_General_CI_AS
 where ar.txdate >= '2018-01-01' and ar.txdate <= '2018-12-31'  and ar.id in ('Inv','Crn','OInv','POSI','POSC')

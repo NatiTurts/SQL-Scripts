@@ -28,7 +28,7 @@ select
 	   when C.iARPriceListNameID = '9' Then 'FOREIGN'
 	   when C.iARPriceListNameID = '10' Then 'COOPS'
 	   End as Pricelist
-from .dbo._bvARAccountsFull C
+from [Database].dbo._bvARAccountsFull C
 inner join .dbo._bvCCCustomer A on A.Account = C.Account
 group by A.Account, A.Name, C.uiARStarrating, C.iARPriceListNameID
 

@@ -48,10 +48,10 @@ select 'Old'[DB],
 , DebitCredit = case when [dbo]._efnGLAccTypesDebits(F.iAccountType) = 1 then 'D' else 'C' end	COLLATE Latin1_General_CI_AS 
 
 from  
-[The_Industrial_Clothing_Company].[dbo].[_evGLAccountsFull]  	F
-left outer join [The_Industrial_Clothing_Company].[dbo].[_bvGLTransactionsFull] T on F.AccountLink = T.AccountLink  
-left outer join [The_Industrial_Clothing_Company].[dbo].[_etblPeriod] P on P.idPeriod = T.Period  
-left join [The_Industrial_Clothing_Company].[dbo].[Project] Pr on Pr.ProjectLink = T.Project
+[Database].[dbo].[_evGLAccountsFull]  	F
+left outer join [Database].[dbo].[_bvGLTransactionsFull] T on F.AccountLink = T.AccountLink  
+left outer join [Database].[dbo].[_etblPeriod] P on P.idPeriod = T.Period  
+left join [Database].[dbo].[Project] Pr on Pr.ProjectLink = T.Project
 
  
 where  F.AccountTypeDescription in ('Other Income','Revenue')
@@ -134,10 +134,10 @@ select 'New',
 , DebitCredit = case when [dbo]._efnGLAccTypesDebits(F.iAccountType) = 1 then 'D' else 'C' end	COLLATE Latin1_General_CI_AS 
 
 from  
-[ICC_NEW].[dbo].[_evGLAccountsFull]  	F
-left outer join [ICC_NEW].[dbo].[_bvGLTransactionsFull] X on F.AccountLink = X.AccountLink  
-left outer join [ICC_NEW].[dbo].[_etblPeriod] P on P.idPeriod = X.Period  
-left join [ICC_NEW].[dbo].[Project] Pr on Pr.ProjectLink = X.Project
+[Database].[dbo].[_evGLAccountsFull]  	F
+left outer join [Database].[dbo].[_bvGLTransactionsFull] X on F.AccountLink = X.AccountLink  
+left outer join [Database].[dbo].[_etblPeriod] P on P.idPeriod = X.Period  
+left join [Database].[dbo].[Project] Pr on Pr.ProjectLink = X.Project
 
  
 where  F.AccountTypeDescription in ('Other Income','Revenue')

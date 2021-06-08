@@ -1,6 +1,0 @@
---Backorder Production Report
---Item code
---Description
---Backorder (qt outstanding)
---Qty on PO
---Link for melusi and ridwaan

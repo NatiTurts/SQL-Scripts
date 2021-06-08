@@ -24,7 +24,7 @@ use tempdb
 				S.Code
 				, S.ItemGroup
 				, [Weighted Value] =  Round((S.Qty_On_Hand*S.AveUCst),2)
-				from ICC_TEST.dbo.StkItem S
+				from Database.dbo.StkItem S
 
 select
 INS.ItemGroup

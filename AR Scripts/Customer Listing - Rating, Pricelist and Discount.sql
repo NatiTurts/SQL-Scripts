@@ -10,5 +10,5 @@ Select
 	   when C.uiARStarrating = '1' Then '0'
 	   when C.uiARStarrating = '0' Then '0'
 	   End as Discount	   
-from .dbo._bvARAccountsFull C
+from [Database].dbo._bvARAccountsFull C
 group by C.Account, C.Name, C.uiARStarrating, C.PriceListName
