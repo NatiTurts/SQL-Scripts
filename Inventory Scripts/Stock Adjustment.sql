@@ -11,9 +11,9 @@ select st.Code AS [Item Code]
 , pst.Debit
 , pst.Credit
 , TxDate as [Adjustment Date]
-from ICC_NEW.dbo._bvSTTransactionsFull pst 
-INNER JOIN ICC_NEW.dbo._bvStockAndWhseItems ST ON pst.AccountLink = st.StockLink and (pst.WarehouseCode=St.WhseCode or isnull(pst.WarehouseCode,'')='') 
-LEFT OUTER JOIN ICC_NEW.dbo.TRCODES tt ON pst.TrCodeID = tt.idTrCodes
+from [Database].dbo._bvSTTransactionsFull pst 
+INNER JOIN [Database].dbo._bvStockAndWhseItems ST ON pst.AccountLink = st.StockLink and (pst.WarehouseCode=St.WhseCode or isnull(pst.WarehouseCode,'')='') 
+LEFT OUTER JOIN [Database].dbo.TRCODES tt ON pst.TrCodeID = tt.idTrCodes
 where (ST.ItemActive=1) and (TxDate>=@DateStart@) and (TxDate<=@DateEnd@) and (pst.TrCode in ('ADJ'))
 
 order by st.Code

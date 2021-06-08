@@ -14,8 +14,8 @@ use tempdb
 					, P.cAuditNumber as [AuditNumber]
 					, P.DrCrAccount as [Customer]
 					, P.TxDate as [DateStamp]
-					from ICC_NEW.dbo.PostGL P
-					inner join ICC_NEW.dbo._bvCMCustomerFull C on C.CustomerID = P.DrCrAccount
+					from [Database].dbo.PostGL P
+					inner join [Database].dbo._bvCMCustomerFull C on C.CustomerID = P.DrCrAccount
 					where (P.TxDate >= '2018-01-01') AND (P.TxDate <= '2021-06-30') and P.Order_No not in ('')
 
 				
@@ -38,8 +38,8 @@ Select distinct
 , GL.TxDate
 , GL.UserName
 from #Final F
-inner join ICC_NEW.dbo.PostGL GL on GL.cAuditNumber = F.FinalAudit
-inner join ICC_NEW.dbo._bvCMCustomerFull CC on CC.CustomerID = GL.DrCrAccount
+inner join [Database].dbo.PostGL GL on GL.cAuditNumber = F.FinalAudit
+inner join [Database].dbo._bvCMCustomerFull CC on CC.CustomerID = GL.DrCrAccount
 --where F.FinalAudit = '320616.0002'
 order by F.FinalAudit
 

@@ -1,4 +1,4 @@
-SELECT ICC_NEW.dbo._efnStartPeriod()
+SELECT Database.dbo._efnStartPeriod()
 
 
 IF OBJECT_ID('tempdb..#tmpTrialBal') IS NOT NULL  DROP TABLE #tmpTrialBal

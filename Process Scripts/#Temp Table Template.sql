@@ -13,7 +13,7 @@ select
 , C.Name as Account_Name
 , C.uiARStarrating as Loyalty_Rating
 , C.On_Hold as Account_on_Hold
-from ICC_TEST.dbo._bvARAccountsFull C
+from [Database].dbo._bvARAccountsFull C
 
 select * from #Temp
 
